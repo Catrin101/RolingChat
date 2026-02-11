@@ -1,0 +1,277 @@
+[gd_scene load_steps=2 format=3 uid="uid://uucnfvw21qsa"]
+
+[ext_resource type="Script" uid="uid://dkg3027jwmyut" path="res://scripts/ui/main_menu_controller.gd" id="1_main_menu"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "RolinChat"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="CreateRoomButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Crear Sala"
+
+[node name="JoinRoomButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Unirse a Sala"
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Salir"
+
+[node name="Spacer3" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="CreatePanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CreatePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Crear Nueva Sala"
+horizontal_alignment = 1
+
+[node name="RoomNameLabel" type="Label" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+layout_mode = 2
+text = "Nombre de la sala:"
+
+[node name="RoomNameInput" type="LineEdit" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Sala de Rol"
+max_length = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CreateCancelButton" type="Button" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancelar"
+
+[node name="CreateConfirmButton" type="Button" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Crear"
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="CodePanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CodePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="CodeDisplayLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+bbcode_enabled = true
+text = "Código de sala:
+
+[b]192.168.1.100:7777[/b]"
+fit_content = true
+
+[node name="CopyCodeButton" type="Button" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+layout_mode = 2
+text = "Copiar Código"
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Iniciar Juego"
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="JoinPanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/JoinPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Unirse a Sala"
+horizontal_alignment = 1
+
+[node name="CodeLabel" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+layout_mode = 2
+text = "Código de sala:"
+
+[node name="CodeInput" type="LineEdit" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "192.168.1.100:7777"
+max_length = 50
+
+[node name="HintLabel" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Formato: IP:Puerto (ejemplo: 192.168.1.100:7777)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="JoinCancelButton" type="Button" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancelar"
+
+[node name="JoinConfirmButton" type="Button" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Unirse"
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "v1.0.0"
+
+[node name="StatusLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.5, 1, 0.5, 1)
+text = "Estado: OK"
+horizontal_alignment = 1
+
+[node name="ErrorLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+text = "Error!"
+horizontal_alignment = 1

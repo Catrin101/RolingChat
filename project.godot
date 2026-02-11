@@ -1,0 +1,23 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="RolingChat"
+run/main_scene="uid://uucnfvw21qsa"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://scripts/autoloads/event_bus.gd"
+GameManager="*res://scripts/autoloads/game_manager.gd"
+AssetRegistry="*res://scripts/autoloads/asset_registry.gd"
+NetworkManager="*res://scripts/autoloads/network_manager.gd"
