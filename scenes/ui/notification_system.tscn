@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cf7umsipvtb3v"]
+
+[ext_resource type="Script" uid="uid://dvg5sy82bif84" path="res://scripts/ui/notification_system.gd" id="1_notif"]
+
+[node name="NotificationSystem" type="CanvasLayer" unique_id=612726992]
+layer = 100
+script = ExtResource("1_notif")
+
+[node name="NotificationContainer" type="VBoxContainer" parent="." unique_id=924931815]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 500.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+alignment = 1

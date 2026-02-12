@@ -28,6 +28,9 @@ var is_host: bool = false
 ## Datos del avatar local (para enviar al host)
 var local_avatar_data: Dictionary = {}
 
+## Monitor de conexiones (solo host)
+var connection_monitor: ConnectionMonitor = null
+
 # ===== CICLO DE VIDA =====
 
 func _ready() -> void:
@@ -37,6 +40,10 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	
+	# Inicializar monitor de conexiones
+	connection_monitor = ConnectionMonitor.new()
+	add_child(connection_monitor)
 	
 	print("[NetworkManager] Sistema de networking inicializado")
 
@@ -82,6 +89,9 @@ func create_room(p_room_name: String = "Sala de Rol") -> String:
 	GameManager.set_room_code(room_code)
 	GameManager.set_room_name(p_room_name)
 	GameManager.local_peer_id = host_peer_id
+	
+	# Iniciar monitoreo de conexiones
+	connection_monitor.start_monitoring()
 	
 	print("[NetworkManager] ✓ Sala creada. Código: %s" % room_code)
 	EventBus.room_created.emit(room_code)
@@ -140,8 +150,15 @@ func disconnect_from_room() -> void:
 	if peer == null:
 		return
 	
+	print("[NetworkManager] Desconectando de la sala...")
+	
+	# Detener monitor de conexiones
+	if is_host and connection_monitor:
+		connection_monitor.stop_monitoring()
+	
 	if is_host:
 		# Host notifica que cierra la sala
+		print("[NetworkManager] Host cerrando sala, notificando a %d cliente(s)" % (players.size() - 1))
 		rpc("_notify_room_closed")
 		await get_tree().create_timer(0.5).timeout
 	
@@ -150,12 +167,15 @@ func disconnect_from_room() -> void:
 	peer = null
 	is_host = false
 	room_code = ""
+	
+	# Guardar conteo para log
+	var player_count = players.size()
 	players.clear()
 	local_avatar_data.clear()
 	
 	GameManager.reset_session()
 	
-	print("[NetworkManager] Desconectado de la sala")
+	print("[NetworkManager] ✓ Desconectado correctamente (%d jugador(es) estaban conectados)" % player_count)
 	EventBus.emit_system_message("Desconectado de la sala")
 
 ## Envía un mensaje de chat a todos
@@ -175,9 +195,12 @@ func send_chat_message(text: String) -> void:
 	
 	var sender_id = multiplayer.get_unique_id()
 	
+	# Siempre usar RPC para broadcasting (tanto host como cliente)
 	if is_host:
-		_broadcast_chat_message(sender_id, text)
+		# Host hace broadcast a todos (incluyéndose a sí mismo con call_local)
+		rpc("_broadcast_chat_message", sender_id, text)
 	else:
+		# Cliente envía al host para que lo distribuya
 		rpc_id(1, "_receive_chat_message", text)
 
 # ===== CALLBACKS DE MULTIPLAYER =====
@@ -196,14 +219,26 @@ func _on_peer_connected(id: int) -> void:
 func _on_peer_disconnected(id: int) -> void:
 	print("[NetworkManager] Peer desconectado: %d" % id)
 	
+	# Desregistrar del monitor
+	if is_host and connection_monitor:
+		connection_monitor.unregister_peer(id)
+	
 	if players.has(id):
 		var player_name = players[id].get("character_name", "Jugador")
 		players.erase(id)
+		
+		# Emitir señales
 		EventBus.player_disconnected.emit(id)
 		EventBus.emit_system_message("%s se ha desconectado" % player_name)
 		
+		# Mostrar notificación visual
+		EventBus.show_notification.emit("%s se desconectó de la sala" % player_name, "warning")
+		
 		if is_host:
+			# Host notifica a todos los demás
 			rpc("_notify_player_left", id, player_name)
+			
+			print("[NetworkManager] Jugadores restantes: %d" % players.size())
 
 func _on_connected_to_server() -> void:
 	print("[NetworkManager] ✓ Conectado al servidor")
@@ -217,9 +252,17 @@ func _on_connection_failed() -> void:
 
 func _on_server_disconnected() -> void:
 	print("[NetworkManager] ✗ El host se desconectó")
+	
+	# Mostrar notificación prominente
+	EventBus.show_error.emit("El host cerró la sala. Volviendo al menú principal...")
+	EventBus.emit_system_message("El host cerró la sala")
+	
+	# Esperar un momento para que el usuario vea el mensaje
+	await get_tree().create_timer(2.0).timeout
+	
+	# Limpiar y volver al menú
 	disconnect_from_room()
 	EventBus.connection_lost.emit()
-	EventBus.emit_error("El host cerró la sala")
 
 # ===== RPCs =====
 
@@ -246,6 +289,9 @@ func _send_avatar_data(avatar_data: Dictionary) -> void:
 		"position": Vector2(320, 240),
 		"state": "idle"
 	}
+	
+	# Registrar en el monitor de conexiones
+	connection_monitor.register_peer(sender_id)
 	
 	# Enviar lista completa de jugadores al recién llegado
 	rpc_id(sender_id, "_receive_player_list", _serialize_players())
@@ -305,7 +351,9 @@ func _receive_chat_message(text: String) -> void:
 		return
 	
 	var sender_id = multiplayer.get_remote_sender_id()
-	_broadcast_chat_message(sender_id, text)
+	
+	# Host hace broadcast a todos (incluyendo al cliente que envió)
+	rpc("_broadcast_chat_message", sender_id, text)
 
 ## [HOST → ALL] Distribuye mensaje de chat
 @rpc("authority", "call_local", "reliable")

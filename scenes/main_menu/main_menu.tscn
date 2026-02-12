@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://uucnfvw21qsa"]
+[gd_scene format=3 uid="uid://uucnfvw21qsa"]
 
 [ext_resource type="Script" uid="uid://dkg3027jwmyut" path="res://scripts/ui/main_menu_controller.gd" id="1_main_menu"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1702682719]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=182979798]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.15, 0.15, 0.2, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1993514496]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,21 +28,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=684744997]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=184505035]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "RolinChat"
 horizontal_alignment = 1
 
-[node name="MainPanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+[node name="MainPanel" type="Panel" parent="CenterContainer/VBoxContainer" unique_id=250276956]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/MainPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/MainPanel" unique_id=742994038]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,41 +51,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer" unique_id=1337715243]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="CreateRoomButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+[node name="CreateRoomButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer" unique_id=544950985]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Crear Sala"
 
-[node name="JoinRoomButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+[node name="JoinRoomButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer" unique_id=273437961]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Unirse a Sala"
 
-[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer" unique_id=622957055]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer" unique_id=1556262615]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Salir"
 
-[node name="Spacer3" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer"]
+[node name="Spacer3" type="Control" parent="CenterContainer/VBoxContainer/MainPanel/VBoxContainer" unique_id=1768421398]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="CreatePanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+[node name="CreatePanel" type="Panel" parent="CenterContainer/VBoxContainer" unique_id=1285673593]
 visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CreatePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CreatePanel" unique_id=2108819979]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,49 +94,49 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer" unique_id=571631676]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer" unique_id=61827802]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Crear Nueva Sala"
 horizontal_alignment = 1
 
-[node name="RoomNameLabel" type="Label" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+[node name="RoomNameLabel" type="Label" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer" unique_id=972436464]
 layout_mode = 2
 text = "Nombre de la sala:"
 
-[node name="RoomNameInput" type="LineEdit" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+[node name="RoomNameInput" type="LineEdit" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer" unique_id=1790799163]
 layout_mode = 2
 placeholder_text = "Sala de Rol"
 max_length = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer" unique_id=1086025743]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CreateCancelButton" type="Button" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer/HBoxContainer"]
+[node name="CreateCancelButton" type="Button" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer/HBoxContainer" unique_id=1397743007]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancelar"
 
-[node name="CreateConfirmButton" type="Button" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer/HBoxContainer"]
+[node name="CreateConfirmButton" type="Button" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer/HBoxContainer" unique_id=142355519]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Crear"
 
-[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/CreatePanel/VBoxContainer" unique_id=1911727259]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="CodePanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+[node name="CodePanel" type="Panel" parent="CenterContainer/VBoxContainer" unique_id=808351433]
 visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CodePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CodePanel" unique_id=2021152629]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,11 +145,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer" unique_id=495517100]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="CodeDisplayLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+[node name="CodeDisplayLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer" unique_id=1807568886]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 bbcode_enabled = true
@@ -158,26 +158,26 @@ text = "Código de sala:
 [b]192.168.1.100:7777[/b]"
 fit_content = true
 
-[node name="CopyCodeButton" type="Button" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+[node name="CopyCodeButton" type="Button" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer" unique_id=780562134]
 layout_mode = 2
 text = "Copiar Código"
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer" unique_id=785244103]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Iniciar Juego"
 
-[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/CodePanel/VBoxContainer" unique_id=1792121454]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="JoinPanel" type="Panel" parent="CenterContainer/VBoxContainer"]
+[node name="JoinPanel" type="Panel" parent="CenterContainer/VBoxContainer" unique_id=712475941]
 visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/JoinPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/JoinPanel" unique_id=183329932]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,49 +186,49 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=1520203521]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=934572188]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Unirse a Sala"
 horizontal_alignment = 1
 
-[node name="CodeLabel" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="CodeLabel" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=1467275927]
 layout_mode = 2
 text = "Código de sala:"
 
-[node name="CodeInput" type="LineEdit" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="CodeInput" type="LineEdit" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=676512491]
 layout_mode = 2
 placeholder_text = "192.168.1.100:7777"
 max_length = 50
 
-[node name="HintLabel" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="HintLabel" type="Label" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=1301049386]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Formato: IP:Puerto (ejemplo: 192.168.1.100:7777)"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=1990733689]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="JoinCancelButton" type="Button" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer"]
+[node name="JoinCancelButton" type="Button" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer" unique_id=1645007331]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancelar"
 
-[node name="JoinConfirmButton" type="Button" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer"]
+[node name="JoinConfirmButton" type="Button" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer" unique_id=1219505256]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Unirse"
 
-[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/JoinPanel/VBoxContainer" unique_id=1360856325]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="VersionLabel" type="Label" parent="."]
+[node name="VersionLabel" type="Label" parent="." unique_id=1597282715]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -240,7 +240,7 @@ offset_bottom = -10.0
 grow_vertical = 0
 text = "v1.0.0"
 
-[node name="StatusLabel" type="Label" parent="."]
+[node name="StatusLabel" type="Label" parent="." unique_id=407784444]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -258,7 +258,7 @@ theme_override_colors/font_color = Color(0.5, 1, 0.5, 1)
 text = "Estado: OK"
 horizontal_alignment = 1
 
-[node name="ErrorLabel" type="Label" parent="."]
+[node name="ErrorLabel" type="Label" parent="." unique_id=1003398310]
 visible = false
 layout_mode = 1
 anchors_preset = 7

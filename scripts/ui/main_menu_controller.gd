@@ -172,12 +172,10 @@ func _on_copy_code_pressed() -> void:
 	_set_status("Código copiado al portapapeles", false)
 
 func _on_start_pressed() -> void:
-	# TODO: Cambiar a escena de lobby/mundo
-	# Por ahora, solo mostramos un mensaje
 	_set_status("Iniciando juego...", false)
 	
-	# En la siguiente fase, aquí cargaríamos:
-	# get_tree().change_scene_to_file("res://scenes/game_world/world.tscn")
+	# Cargar lobby temporal
+	get_tree().change_scene_to_file("res://scenes/game_world/lobby.tscn")
 	
 	print("[MainMenu] Iniciando juego como host")
 
@@ -200,7 +198,10 @@ func _on_room_created(room_code: String) -> void:
 func _on_room_joined() -> void:
 	_set_status("Conectado a la sala", false)
 	
-	# TODO: Cambiar a escena de lobby/mundo
+	# Cargar lobby temporal
+	await get_tree().create_timer(0.5).timeout  # Pequeña pausa para feedback visual
+	get_tree().change_scene_to_file("res://scenes/game_world/lobby.tscn")
+	
 	print("[MainMenu] Conectado exitosamente como cliente")
 
 func _on_connection_failed(reason: String) -> void:

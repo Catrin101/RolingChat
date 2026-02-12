@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://dm7w2hb8nql2h"]
+
+[ext_resource type="Script" uid="uid://2rlfxvwjwacf" path="res://scripts/ui/lobby_controller.gd" id="1_lobby"]
+[ext_resource type="PackedScene" uid="uid://bpo75ufgaa2x2" path="res://scenes/ui/chat_panel.tscn" id="2_chat"]
+[ext_resource type="PackedScene" path="res://scenes/ui/notification_system.tscn" id="3_notif"]
+
+[node name="Lobby" type="Control" unique_id=1946075497]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lobby")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1462007142]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.25, 1)
+
+[node name="TopPanel" type="Panel" parent="." unique_id=1488909777]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel" unique_id=239586280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Spacer1" type="Control" parent="TopPanel/HBoxContainer" unique_id=910694427]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="RoomInfoLabel" type="Label" parent="TopPanel/HBoxContainer" unique_id=1977889912]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sala: Lobby | Código: 192.168.1.100:7777"
+vertical_alignment = 1
+
+[node name="PlayersLabel" type="Label" parent="TopPanel/HBoxContainer" unique_id=1228379438]
+layout_mode = 2
+text = "Jugadores: 1/8"
+vertical_alignment = 1
+
+[node name="DisconnectButton" type="Button" parent="TopPanel/HBoxContainer" unique_id=779280163]
+layout_mode = 2
+text = "Desconectar"
+
+[node name="Spacer2" type="Control" parent="TopPanel/HBoxContainer" unique_id=1885277896]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=173518207]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=476026698]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WelcomeLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1674298634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Lobby Temporal"
+horizontal_alignment = 1
+
+[node name="InfoLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=603457782]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Este es un lobby temporal para testing del chat.
+En futuras fases, este será reemplazado por el mundo de juego."
+horizontal_alignment = 1
+
+[node name="HelpLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1437281162]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Comandos de chat:
+(texto normal) - Mensaje In Character (IC)
+// o /ooc [texto] - Out Of Character (OOC)
+/me [acción] - Narración de acción
+/roll XdY - Tira dados"
+horizontal_alignment = 1
+
+[node name="ChatPanel" parent="." unique_id=1834096073 instance=ExtResource("2_chat")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -650.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="NotificationSystem" parent="." unique_id=194331545 instance=ExtResource("3_notif")]
