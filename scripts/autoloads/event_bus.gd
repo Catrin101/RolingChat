@@ -65,6 +65,9 @@ signal show_notification(message: String, type: String)
 ## Emitida cuando se debe mostrar un error
 signal show_error(message: String)
 
+## Emitida cuando se debe mostrar un mensaje de éxito
+signal show_success(message: String)
+
 # ===== MÉTODOS DE UTILIDAD =====
 
 func _ready() -> void:
@@ -78,6 +81,11 @@ func emit_system_message(message: String) -> void:
 func emit_error(message: String) -> void:
 	show_error.emit(message)
 	print_rich("[color=red][ERROR][/color] ", message)
+
+## Emite una notificación de éxito
+func emit_success(message: String) -> void:
+	show_success.emit(message)
+	print_rich("[color=green][SUCCESS][/color] ", message)
 
 ## Emite una notificación informativa
 func emit_info(message: String) -> void:

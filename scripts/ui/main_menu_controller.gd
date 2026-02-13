@@ -13,6 +13,7 @@ extends Control
 @onready var main_panel: Panel = $CenterContainer/VBoxContainer/MainPanel
 @onready var create_room_button: Button = $CenterContainer/VBoxContainer/MainPanel/VBoxContainer/CreateRoomButton
 @onready var join_room_button: Button = $CenterContainer/VBoxContainer/MainPanel/VBoxContainer/JoinRoomButton
+@onready var create_avatar_button: Button = $CenterContainer/VBoxContainer/MainPanel/VBoxContainer/CreateAvatarButton
 @onready var quit_button: Button = $CenterContainer/VBoxContainer/MainPanel/VBoxContainer/QuitButton
 
 # Panel de crear sala
@@ -50,6 +51,7 @@ func _ready() -> void:
 	# Conectar señales de botones
 	create_room_button.pressed.connect(_on_create_room_pressed)
 	join_room_button.pressed.connect(_on_join_room_pressed)
+	create_avatar_button.pressed.connect(_on_create_avatar_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	
 	create_confirm_button.pressed.connect(_on_create_confirm_pressed)
@@ -116,6 +118,9 @@ func _on_create_room_pressed() -> void:
 
 func _on_join_room_pressed() -> void:
 	_show_join_panel()
+
+func _on_create_avatar_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/avatar_creator/avatar_creator.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
