@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cl8m5n6p2sax1"]
+
+[ext_resource type="Script" uid="uid://ca8lopnt18b7c" path="res://scripts/ui/profile_card.gd" id="1_card"]
+
+[node name="ProfileCard" type="PanelContainer" unique_id=345587532]
+custom_minimum_size = Vector2(350, 150)
+script = ExtResource("1_card")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1050131157]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1495148634]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1056825429]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Nombre del Personaje"
+
+[node name="SummaryLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1710973751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Resumen: Iso 0-0-0 | Side 0-0-0"
+
+[node name="CreatedLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2118110060]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Creado: 2026-02-12"
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1345514578]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SelectButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer" unique_id=1825590085]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seleccionar"
+
+[node name="EditButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer" unique_id=1850671480]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Editar"
+
+[node name="DeleteButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer" unique_id=244559368]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eliminar"

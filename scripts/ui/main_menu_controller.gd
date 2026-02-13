@@ -34,6 +34,14 @@ extends Control
 @onready var join_confirm_button: Button = $CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer/JoinConfirmButton
 @onready var join_cancel_button: Button = $CenterContainer/VBoxContainer/JoinPanel/VBoxContainer/HBoxContainer/JoinCancelButton
 
+# Panel de perfiles
+@onready var profiles_panel: Panel = $CenterContainer/VBoxContainer/ProfilesPanel
+@onready var profiles_scroll: ScrollContainer = $CenterContainer/VBoxContainer/ProfilesPanel/VBoxContainer/ScrollContainer
+@onready var profiles_container: VBoxContainer = $CenterContainer/VBoxContainer/ProfilesPanel/VBoxContainer/ScrollContainer/ProfilesContainer
+@onready var no_profiles_label: Label = $CenterContainer/VBoxContainer/ProfilesPanel/VBoxContainer/NoProfilesLabel
+@onready var new_profile_button: Button = $CenterContainer/VBoxContainer/ProfilesPanel/VBoxContainer/NewProfileButton
+@onready var profiles_back_button: Button = $CenterContainer/VBoxContainer/ProfilesPanel/VBoxContainer/BackButton
+
 # Mensajes
 @onready var status_label: Label = $StatusLabel
 @onready var error_label: Label = $ErrorLabel
@@ -41,6 +49,8 @@ extends Control
 # ===== ESTADO =====
 
 var current_room_code: String = ""
+var selected_profile_name: String = ""
+var profile_card_scene: PackedScene = preload("res://scenes/ui/profile_card.tscn")
 
 # ===== CICLO DE VIDA =====
 
@@ -63,6 +73,9 @@ func _ready() -> void:
 	copy_code_button.pressed.connect(_on_copy_code_pressed)
 	start_button.pressed.connect(_on_start_pressed)
 	
+	new_profile_button.pressed.connect(_on_new_profile_pressed)
+	profiles_back_button.pressed.connect(_on_profiles_back_pressed)
+	
 	# Conectar señales del EventBus
 	EventBus.room_created.connect(_on_room_created)
 	EventBus.room_joined.connect(_on_room_joined)
@@ -76,7 +89,23 @@ func _ready() -> void:
 	# Mostrar panel principal
 	_show_main_panel()
 	
+	# Cargar perfil actual si existe
+	_load_selected_profile()
+	
 	print("[MainMenu] Menú principal inicializado")
+
+# ===== CARGA DE PERFIL =====
+
+func _load_selected_profile() -> void:
+	# Si ya hay un avatar en GameManager, usarlo
+	var current_avatar = GameManager.get_current_avatar()
+	if current_avatar != null:
+		selected_profile_name = current_avatar.character_name
+		print("[MainMenu] Perfil actual: %s" % selected_profile_name)
+		return
+	
+	# Intentar cargar último perfil usado (guardado en config)
+	# Por ahora, no hacemos nada si no hay perfil
 
 # ===== NAVEGACIÓN DE PANELES =====
 
@@ -85,7 +114,14 @@ func _show_main_panel() -> void:
 	create_panel.visible = false
 	code_panel.visible = false
 	join_panel.visible = false
+	profiles_panel.visible = false
 	_clear_status()
+	
+	# Actualizar texto del botón de avatar según si hay perfil
+	if selected_profile_name.is_empty():
+		create_avatar_button.text = "✏ Crear Avatar"
+	else:
+		create_avatar_button.text = "✏ " + selected_profile_name
 
 func _show_create_panel() -> void:
 	main_panel.visible = false
@@ -107,9 +143,19 @@ func _show_join_panel() -> void:
 	create_panel.visible = false
 	code_panel.visible = false
 	join_panel.visible = true
+	profiles_panel.visible = false
 	code_input.clear()
 	code_input.grab_focus()
 	_clear_status()
+
+func _show_profiles_panel() -> void:
+	main_panel.visible = false
+	create_panel.visible = false
+	code_panel.visible = false
+	join_panel.visible = false
+	profiles_panel.visible = true
+	_clear_status()
+	_refresh_profiles_list()
 
 # ===== CALLBACKS DE BOTONES =====
 
@@ -120,12 +166,17 @@ func _on_join_room_pressed() -> void:
 	_show_join_panel()
 
 func _on_create_avatar_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/avatar_creator/avatar_creator.tscn")
+	_show_profiles_panel()
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_create_confirm_pressed() -> void:
+	# Validar que haya un perfil seleccionado
+	if selected_profile_name.is_empty():
+		EventBus.show_error.emit("Debes seleccionar un perfil antes de crear una sala")
+		return
+	
 	var room_name = room_name_input.text.strip_edges()
 	
 	if room_name.is_empty():
@@ -146,6 +197,11 @@ func _on_create_cancel_pressed() -> void:
 	_show_main_panel()
 
 func _on_join_confirm_pressed() -> void:
+	# Validar que haya un perfil seleccionado
+	if selected_profile_name.is_empty():
+		EventBus.show_error.emit("Debes seleccionar un perfil antes de unirte a una sala")
+		return
+	
 	var code = code_input.text.strip_edges()
 	
 	if code.is_empty():
@@ -154,14 +210,20 @@ func _on_join_confirm_pressed() -> void:
 	
 	_set_status("Conectando...", false)
 	
-	# Avatar temporal (en MVP usamos datos vacíos)
-	var temp_avatar = {
-		"name": "Jugador",
-		"iso": {},
-		"side": {}
-	}
+	# Obtener avatar actual
+	var current_avatar = GameManager.get_current_avatar()
+	var avatar_dict = {}
 	
-	var success = NetworkManager.join_room(code, temp_avatar)
+	if current_avatar:
+		avatar_dict = current_avatar.to_dict()
+	else:
+		# Fallback si por alguna razón no hay avatar
+		avatar_dict = {
+			"name": "Jugador",
+			"character_name": "Jugador"
+		}
+	
+	var success = NetworkManager.join_room(code, avatar_dict)
 	
 	if not success:
 		_set_status("Código inválido", true)
@@ -230,3 +292,90 @@ func _set_status(message: String, is_error: bool) -> void:
 func _clear_status() -> void:
 	status_label.visible = false
 	error_label.visible = false
+
+# ===== CALLBACKS - PANEL DE PERFILES =====
+
+func _on_new_profile_pressed() -> void:
+	# Ir al creador de avatares
+	get_tree().change_scene_to_file("res://scenes/avatar_creator/avatar_creator.tscn")
+
+func _on_profiles_back_pressed() -> void:
+	_show_main_panel()
+
+func _on_profile_selected(profile_name: String) -> void:
+	# Cargar y establecer como perfil actual
+	if ProfileManager.load_profile_as_current(profile_name):
+		selected_profile_name = profile_name
+		EventBus.show_success.emit("Perfil '%s' seleccionado" % profile_name)
+		_refresh_profiles_list()
+		
+		# Actualizar botón en menú principal
+		create_avatar_button.text = "✏ " + profile_name
+	else:
+		EventBus.show_error.emit("Error al cargar perfil")
+
+func _on_profile_edited(profile_name: String) -> void:
+	# Cargar perfil en el creador para edición
+	var avatar_data = ProfileManager.load_profile(profile_name)
+	if avatar_data == null:
+		EventBus.show_error.emit("Error al cargar perfil")
+		return
+	
+	# Establecer como actual y cambiar a editor
+	GameManager.set_current_avatar(avatar_data)
+	get_tree().change_scene_to_file("res://scenes/avatar_creator/avatar_creator.tscn")
+
+func _on_profile_deleted(profile_name: String) -> void:
+	if ProfileManager.delete_profile(profile_name):
+		EventBus.show_success.emit("Perfil eliminado")
+		
+		# Si era el seleccionado, limpiar selección
+		if selected_profile_name == profile_name:
+			selected_profile_name = ""
+			GameManager.set_current_avatar(null)
+			create_avatar_button.text = "✏ Crear Avatar"
+		
+		_refresh_profiles_list()
+	else:
+		EventBus.show_error.emit("Error al eliminar perfil")
+
+# ===== GESTIÓN DE LISTA DE PERFILES =====
+
+func _refresh_profiles_list() -> void:
+	# Limpiar lista actual
+	for child in profiles_container.get_children():
+		child.queue_free()
+	
+	# Obtener perfiles disponibles
+	var profiles = ProfileManager.get_available_profiles()
+	
+	if profiles.is_empty():
+		# Mostrar mensaje de no perfiles
+		no_profiles_label.visible = true
+		profiles_scroll.visible = false
+	else:
+		no_profiles_label.visible = false
+		profiles_scroll.visible = true
+		
+		# Crear card para cada perfil
+		for profile_name in profiles:
+			var avatar_data = ProfileManager.load_profile(profile_name)
+			
+			if avatar_data == null:
+				continue
+			
+			# Instanciar ProfileCard
+			var card = profile_card_scene.instantiate()
+			profiles_container.add_child(card)
+			
+			# Configurar card
+			card.setup(profile_name, avatar_data)
+			
+			# Marcar como seleccionado si corresponde
+			if profile_name == selected_profile_name:
+				card.set_selected(true)
+			
+			# Conectar señales
+			card.selected.connect(_on_profile_selected)
+			card.edited.connect(_on_profile_edited)
+			card.deleted.connect(_on_profile_deleted)
