@@ -5,12 +5,10 @@ extends Control
 ## Responsabilidad: Gestionar la escena de lobby donde los jugadores pueden chatear
 ## Este es un MVP, será reemplazado por el mundo completo en futuras fases
 
-# ===== REFERENCIAS DE NODOS =====
+# ===== REFERENCIAS A NODOS =====
 
-@onready var room_info_label: Label = $TopPanel/HBoxContainer/RoomInfoLabel
-@onready var players_label: Label = $TopPanel/HBoxContainer/PlayersLabel
-@onready var disconnect_button: Button = $TopPanel/HBoxContainer/DisconnectButton
-@onready var chat_panel: Control = $ChatPanel
+@onready var room_info_label: Label = $RoomInfoLabel
+@onready var players_label: Label = $PlayersLabel
 
 # ===== ESTADO =====
 
@@ -19,10 +17,6 @@ var connected_players: int = 0
 # ===== CICLO DE VIDA =====
 
 func _ready() -> void:
-	# Conectar señales
-	disconnect_button.pressed.connect(_on_disconnect_pressed)
-	
-	# Conectar señales del EventBus
 	EventBus.player_connected.connect(_on_player_connected)
 	EventBus.player_disconnected.connect(_on_player_disconnected)
 	EventBus.connection_lost.connect(_on_connection_lost)
@@ -53,6 +47,7 @@ func _on_disconnect_pressed() -> void:
 	confirm.popup_centered()
 
 func _disconnect_confirmed() -> void:
+	print("[Lobby] Desconectando de la sala...")
 	NetworkManager.disconnect_from_room()
 	get_tree().change_scene_to_file("res://scenes/main_menu/main_menu.tscn")
 

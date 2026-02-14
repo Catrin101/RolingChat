@@ -47,11 +47,10 @@ func _ready() -> void:
 	
 	print("[NetworkManager] Sistema de networking inicializado")
 
-# ===== API PÚBLICA =====
-
 ## Crea una nueva sala como host
-## Retorna el código de la sala (IP:Puerto)
-func create_room(p_room_name: String = "Sala de Rol") -> String:
+## p_room_name: Nombre descriptivo de la sala
+## Retorna: Código de sala (IP:Puerto) o cadena vacía si falla
+func create_room(p_room_name: String) -> String:
 	if peer != null:
 		push_error("[NetworkManager] Ya estás en una sala")
 		EventBus.emit_error("Ya estás conectado a una sala")
@@ -196,14 +195,7 @@ func send_chat_message(text: String) -> void:
 	var sender_id = multiplayer.get_unique_id()
 	
 	# Siempre usar RPC para broadcasting (tanto host como cliente)
-	if is_host:
-		# Host hace broadcast a todos (incluyéndose a sí mismo con call_local)
-		rpc("_broadcast_chat_message", sender_id, text)
-	else:
-		# Cliente envía al host para que lo distribuya
-		rpc_id(1, "_receive_chat_message", text)
 
-# ===== CALLBACKS DE MULTIPLAYER =====
 
 func _on_peer_connected(id: int) -> void:
 	print("[NetworkManager] Peer conectado: %d" % id)
@@ -364,14 +356,7 @@ func _broadcast_chat_message(sender_id: int, text: String) -> void:
 	var sender_name = players[sender_id]["character_name"]
 	EventBus.message_received.emit(sender_name, text, "normal")
 
-## [HOST → ALL] Notifica que un jugador se fue
-@rpc("authority", "call_local", "reliable")
-func _notify_player_left(peer_id: int, player_name: String) -> void:
-	if players.has(peer_id):
-		players.erase(peer_id)
-	EventBus.player_disconnected.emit(peer_id)
 
-# ===== MÉTODOS PRIVADOS =====
 
 func _generate_room_code() -> String:
 	# Obtener IP local

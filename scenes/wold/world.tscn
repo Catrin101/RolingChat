@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw8x5n4m2p7q1"]
+
+[ext_resource type="Script" path="res://scripts/ui/world_controller.gd" id="1_world"]
+[ext_resource type="Script" path="res://scripts/systems/world/player_spawner.gd" id="2_spawner"]
+[ext_resource type="PackedScene" uid="uid://bpo75ufgaa2x2" path="res://scenes/ui/chat_panel.tscn" id="3_chat"]
+[ext_resource type="PackedScene" uid="uid://cf7umsipvtb3v" path="res://scenes/ui/notification_system.tscn" id="4_notif"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_world")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.25, 0.3, 0.25, 1)
+
+[node name="PlayerSpawner" type="Node2D" parent="."]
+script = ExtResource("2_spawner")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="Panel" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="PlayersLabel" type="Label" parent="UI/TopBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -11.5
+offset_right = 200.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Jugadores: 0/8"
+vertical_alignment = 1
+
+[node name="DisconnectButton" type="Button" parent="UI/TopBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -15.0
+offset_right = -20.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Desconectar"
+
+[node name="ChatPanel" parent="UI" instance=ExtResource("3_chat")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -650.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="NotificationSystem" parent="UI" instance=ExtResource("4_notif")]
+
+[node name="HelpLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 300.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 14
+text = "Controles:
+WASD - Mover
+ESC - Menú"
