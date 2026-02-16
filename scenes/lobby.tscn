@@ -1,87 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://8nvi5r8q3n0t"]
+[gd_scene format=3 uid="uid://8nvi5r8q3n0t"]
 
-[ext_resource type="Script" path="res://scripts/game/world_controller.gd" id="1_o1atq"]
-[ext_resource type="PackedScene" uid="uid://diyipsmxpq0kx" path="res://scenes/chat.tscn" id="2_5gu6x"]
-[ext_resource type="Theme" uid="uid://theme_main" path="res://theme/main_theme.tres" id="3_theme"]
+[ext_resource type="Script" uid="uid://pwlo787hgk74" path="res://scripts/game/world_controller.gd" id="1_o1atq"]
+[ext_resource type="PackedScene" uid="uid://chigxavk2raaw" path="res://scenes/chat.tscn" id="2_5gu6x"]
+[ext_resource type="Theme" uid="uid://bnjjnxrvpmill" path="res://theme/main_theme.tres" id="3_theme"]
 
 [sub_resource type="TileSet" id="TileSet_lobby"]
-# Placeholder - debe configurarse con tu tileset real
-tile_size = Vector2i(32, 32)
 
-[node name="Lobby" type="Node2D"]
+[node name="Lobby" type="Node2D" unique_id=1277972245]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=847522745]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.0588235, 0.0588235, 0.0784314, 1)
 
-[node name="Map" type="TileMapLayer" parent="."]
+[node name="Map" type="TileMapLayer" parent="." unique_id=2061022535]
 tile_set = SubResource("TileSet_lobby")
 
-[node name="SpawnPoints" type="Node2D" parent="."]
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=2034670944]
 
-[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints" unique_id=134308432]
 position = Vector2(200, 200)
 
-[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints" unique_id=205330366]
 position = Vector2(300, 200)
 
-[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints" unique_id=1787556469]
 position = Vector2(400, 200)
 
-[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints" unique_id=1634184835]
 position = Vector2(500, 200)
 
-[node name="InteractiveObjects" type="Node2D" parent="."]
+[node name="InteractiveObjects" type="Node2D" parent="." unique_id=888265164]
 
-[node name="WorldController" type="Node" parent="."]
+[node name="WorldController" type="Node" parent="." unique_id=1598218034]
 script = ExtResource("1_o1atq")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=111640722]
 layer = 100
 
-[node name="Chat" parent="UILayer" instance=ExtResource("2_5gu6x")]
+[node name="Chat" parent="UILayer" unique_id=595343565 instance=ExtResource("2_5gu6x")]
 
-[node name="TopBar" type="PanelContainer" parent="UILayer"]
+[node name="TopBar" type="PanelContainer" parent="UILayer" unique_id=1477879861]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
 theme = ExtResource("3_theme")
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/TopBar"]
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/TopBar" unique_id=780159022]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/TopBar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/TopBar/MarginContainer" unique_id=1523335680]
 layout_mode = 2
 
-[node name="RoomCodeLabel" type="Label" parent="UILayer/TopBar/MarginContainer/HBoxContainer"]
+[node name="RoomCodeLabel" type="Label" parent="UILayer/TopBar/MarginContainer/HBoxContainer" unique_id=1929449758]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Código de Sala: XXXXXXXX"
 
-[node name="HSeparator" type="VSeparator" parent="UILayer/TopBar/MarginContainer/HBoxContainer"]
+[node name="HSeparator" type="VSeparator" parent="UILayer/TopBar/MarginContainer/HBoxContainer" unique_id=701111144]
 layout_mode = 2
 
-[node name="PlayersLabel" type="Label" parent="UILayer/TopBar/MarginContainer/HBoxContainer"]
+[node name="PlayersLabel" type="Label" parent="UILayer/TopBar/MarginContainer/HBoxContainer" unique_id=241783717]
 layout_mode = 2
 text = "Jugadores: 1/8"
 
-[node name="Control" type="Control" parent="UILayer/TopBar/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="UILayer/TopBar/MarginContainer/HBoxContainer" unique_id=988952527]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeaveButton" type="Button" parent="UILayer/TopBar/MarginContainer/HBoxContainer"]
+[node name="LeaveButton" type="Button" parent="UILayer/TopBar/MarginContainer/HBoxContainer" unique_id=639917028]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91, 0.3, 0.24, 1)
 text = "Salir"
 
-[node name="InstructionsPanel" type="PanelContainer" parent="UILayer"]
+[node name="InstructionsPanel" type="PanelContainer" parent="UILayer" unique_id=2001151364]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -92,24 +90,24 @@ offset_bottom = 150.0
 grow_horizontal = 2
 theme = ExtResource("3_theme")
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/InstructionsPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/InstructionsPanel" unique_id=1863161168]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/InstructionsPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/InstructionsPanel/MarginContainer" unique_id=2042433921]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="TitleLabel" type="Label" parent="UILayer/InstructionsPanel/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="UILayer/InstructionsPanel/MarginContainer/VBoxContainer" unique_id=1367710580]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Controles:"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="UILayer/InstructionsPanel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UILayer/InstructionsPanel/MarginContainer/VBoxContainer" unique_id=1587405466]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "WASD / Flechas - Mover

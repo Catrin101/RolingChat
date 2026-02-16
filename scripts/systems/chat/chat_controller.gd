@@ -12,6 +12,23 @@ var history: Array[String] = []
 const MAX_HISTORY = 100
 
 func _ready():
+	# ✅ CRÍTICO: Verificar que todos los nodos existen
+	if not chat_log:
+		push_error("[ChatController] ERROR: chat_log es null - verificar ruta del nodo")
+		return
+	
+	if not input_field:
+		push_error("[ChatController] ERROR: input_field es null")
+		return
+	
+	if not send_button:
+		push_error("[ChatController] ERROR: send_button es null")
+		return
+	
+	if not chat_scroll:
+		push_error("[ChatController] ERROR: chat_scroll es null")
+		return
+	
 	# Conectar señales
 	input_field.text_submitted.connect(_on_text_submitted)
 	send_button.pressed.connect(_on_send_pressed)
@@ -21,8 +38,13 @@ func _ready():
 	
 	# Mensaje de bienvenida
 	_add_system_message("Chat iniciado. Escribe '/?' para ver comandos disponibles.")
+	
+	print("[ChatController] Inicializado correctamente")
 
 func _on_send_pressed():
+	if not input_field:
+		return
+		
 	var text = input_field.text.strip_edges()
 	if text.is_empty():
 		return
@@ -48,6 +70,11 @@ func _on_chat_message_received(sender: String, text: String, _type: String):
 	_add_to_log(formatted)
 
 func _add_to_log(message: String):
+	# ✅ VERIFICACIÓN: Asegurar que chat_log existe
+	if not chat_log:
+		push_error("[ChatController] No se puede añadir mensaje: chat_log es null")
+		return
+	
 	# Añadir al historial
 	history.append(message)
 	if history.size() > MAX_HISTORY:
@@ -57,8 +84,9 @@ func _add_to_log(message: String):
 	chat_log.append_text(message + "\n")
 	
 	# Hacer scroll automático al final
-	await get_tree().process_frame
-	chat_scroll.scroll_vertical = int(chat_scroll.get_v_scroll_bar().max_value)
+	if chat_scroll:
+		await get_tree().process_frame
+		chat_scroll.scroll_vertical = int(chat_scroll.get_v_scroll_bar().max_value)
 
 func _add_system_message(text: String):
 	var formatted = "[color=#888888][i]• " + text + "[/i][/color]"
@@ -74,10 +102,21 @@ func _show_help():
 
 # Métodos públicos para otros sistemas
 func add_notification(text: String, color: String = "#F5A623"):
+	# ✅ VERIFICACIÓN: Asegurar que chat_log existe antes de usar
+	if not is_node_ready() or not chat_log:
+		# Si el chat no está listo, esperar
+		await ready
+		if not chat_log:
+			push_error("[ChatController] No se puede mostrar notificación: chat_log es null")
+			return
+	
 	var formatted = "[color=" + color + "]📢 " + text + "[/color]"
 	_add_to_log(formatted)
 
 func clear_chat():
+	if not chat_log:
+		return
+		
 	chat_log.clear()
 	history.clear()
 	_add_system_message("Chat limpiado")
