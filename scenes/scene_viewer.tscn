@@ -1,39 +1,52 @@
-[gd_scene format=3 uid="uid://f1jfe1q22ly5"]
+[gd_scene load_steps=3 format=3 uid="uid://f1jfe1q22ly5"]
 
-[node name="SceneViewer" type="ColorRect" unique_id=232598088]
+[ext_resource type="Script" path="res://scripts/ui/scene_viewer.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://theme_main" path="res://theme/main_theme.tres" id="2_theme"]
+
+[node name="SceneViewer" type="ColorRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.8)
+color = Color(0, 0, 0, 0.85)
+script = ExtResource("1_script")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1497849680]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="nombre de la acción" type="Label" parent="." unique_id=387358998]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "nombre de la acción"
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme = ExtResource("2_theme")
+theme_override_constants/separation = 20
 
-[node name="Button" type="Button" parent="." unique_id=1602408594]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="ActionNameLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Nombre de la Acción"
+horizontal_alignment = 1
+
+[node name="ImagePanel" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="ImageTexture" type="TextureRect" parent="CenterContainer/VBoxContainer/ImagePanel"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="DismissButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "👋 Despedirse"

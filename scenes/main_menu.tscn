@@ -1,17 +1,28 @@
 [gd_scene format=3 uid="uid://b7pjvnfb8wi21"]
 
 [ext_resource type="Script" uid="uid://b5fu5lvkb7qkq" path="res://scripts/ui/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Theme" uid="uid://bnjjnxrvpmill" path="res://theme/main_theme.tres" id="2_theme"]
 
-[node name="MainMenu" type="Control" unique_id=2083368775]
+[node name="MainMenu" type="Control" unique_id=1160521223]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_theme")
 script = ExtResource("1_l6cm7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1578976749]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=194697918]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.117647, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1063856525]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,51 +30,102 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -150.0
+offset_top = -200.0
 offset_right = 200.0
-offset_bottom = 150.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 15
-alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=2047498837]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1952609065]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=977681350]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
 text = "RolinChat MVP"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1078110522]
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1860897535]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Crear Sala"
+theme_override_colors/font_color = Color(0.69, 0.69, 0.76, 1)
+theme_override_font_sizes/font_size = 14
+text = "Plataforma de Rol Multijugador"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=134657193]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=1075144929]
 layout_mode = 2
-theme_override_constants/separation = 15
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=397086091]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CreateRoomButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonsContainer" unique_id=1487197741]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "🎲 Crear Sala"
+
+[node name="JoinContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/ButtonsContainer" unique_id=1714239342]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="JoinLabel" type="Label" parent="CenterContainer/VBoxContainer/ButtonsContainer/JoinContainer" unique_id=1714118814]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Unirse a Sala Existente:"
+
+[node name="JoinHBox" type="HBoxContainer" parent="CenterContainer/VBoxContainer/ButtonsContainer/JoinContainer" unique_id=186129078]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CodeInput" type="LineEdit" parent="CenterContainer/VBoxContainer/ButtonsContainer/JoinContainer/JoinHBox" unique_id=1745693981]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Código de Sala"
 alignment = 1
+max_length = 8
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=211867238]
+[node name="JoinButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonsContainer/JoinContainer/JoinHBox" unique_id=290634320]
+custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Código de sala"
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=275264358]
-layout_mode = 2
-size_flags_horizontal = 3
 text = "Unirse"
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1342540817]
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/VBoxContainer/ButtonsContainer" unique_id=1370501991]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonsContainer" unique_id=618377710]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.3, 0.24, 1)
 text = "Salir"
 
-[node name="Panel" type="Panel" parent="." unique_id=33069952]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="StatusPanel" type="PanelContainer" parent="." unique_id=633477281]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -80.0
+offset_right = 250.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Label" type="Label" parent="Panel" unique_id=103144284]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="MarginContainer" type="MarginContainer" parent="StatusPanel" unique_id=1023688578]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="StatusLabel" type="Label" parent="StatusPanel/MarginContainer" unique_id=1341632962]
+layout_mode = 2
+text = "Listo para jugar"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

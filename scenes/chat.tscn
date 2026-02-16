@@ -1,37 +1,93 @@
-[gd_scene format=3 uid="uid://diyipsmxpq0kx"]
+[gd_scene load_steps=3 format=3 uid="uid://diyipsmxpq0kx"]
 
-[ext_resource type="Script" uid="uid://cgrok5sc46323" path="res://scripts/systems/chat/chat_controller.gd" id="1_4o336"]
+[ext_resource type="Script" path="res://scripts/systems/chat/chat_controller.gd" id="1_4o336"]
+[ext_resource type="Theme" uid="uid://theme_main" path="res://theme/main_theme.tres" id="2_theme"]
 
-[node name="Chat" type="Control" unique_id=791732358]
-custom_minimum_size = Vector2(400, 250)
+[node name="Chat" type="Control"]
+custom_minimum_size = Vector2(450, 300)
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -200.0
+offset_left = -470.0
+offset_top = -320.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("2_theme")
 script = ExtResource("1_4o336")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2018768071]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="ChatLog" type="RichTextLabel" parent="VBoxContainer" unique_id=274752760]
-custom_minimum_size = Vector2(400, 200)
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeaderHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1153424887]
-layout_mode = 2
-
-[node name="InputField" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=1751357497]
+[node name="ChatTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HeaderHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "💬 Chat"
 
-[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=274477387]
+[node name="HelpButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HeaderHBox"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+text = "?"
+tooltip_text = "Comandos:
+/me [acción] - Acción narrativa
+//[texto] o /ooc [texto] - Fuera de personaje
+/roll XdY - Tirar dados"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ChatLogScroll" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ChatLog" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/ChatLogScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true
+
+[node name="InputContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InputField" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/InputContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Escribe tu mensaje..."
+max_length = 200
+caret_blink = true
+
+[node name="SendButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/InputContainer"]
+custom_minimum_size = Vector2(80, 35)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Enviar"

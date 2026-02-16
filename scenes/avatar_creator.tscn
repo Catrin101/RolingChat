@@ -1,80 +1,203 @@
-[gd_scene format=3 uid="uid://dmpi2gavmgakq"]
+[gd_scene load_steps=3 format=3 uid="uid://dmpi2gavmgakq"]
 
-[ext_resource type="Script" uid="uid://7vxf11gvukvl" path="res://scripts/ui/avatar_creator.gd" id="1_d88xq"]
+[ext_resource type="Script" path="res://scripts/ui/avatar_creator.gd" id="1_d88xq"]
+[ext_resource type="Theme" uid="uid://theme_main" path="res://theme/main_theme.tres" id="2_theme"]
 
-[node name="AvatarCreator" type="Control" unique_id=457603489]
+[node name="AvatarCreator" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_theme")
 script = ExtResource("1_d88xq")
 
-[node name="fondo" type="Panel" parent="." unique_id=371874925]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.117647, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="fondo" unique_id=995808036]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 30
 
-[node name="Label" type="Label" parent="fondo/VBoxContainer" unique_id=291874437]
-layout_mode = 2
-text = "Crear Avatar"
-
-[node name="nombre" type="LineEdit" parent="fondo/VBoxContainer" unique_id=1773848012]
-layout_mode = 2
-placeholder_text = "Nombre"
-
-[node name="descripción" type="TextEdit" parent="fondo/VBoxContainer" unique_id=184514716]
-layout_mode = 2
-theme_override_constants/outline_size = 4
-placeholder_text = "descripción"
-
-[node name="Selector de imagen" type="HBoxContainer" parent="fondo/VBoxContainer" unique_id=76261283]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="fondo/VBoxContainer/Selector de imagen" unique_id=729864177]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "✨ Creador de Avatares"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="fondo/VBoxContainer/Selector de imagen" unique_id=453925431]
+[node name="ContentHBox" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Cargar desde archivo..."
+size_flags_vertical = 3
+theme_override_constants/separation = 30
 
-[node name="Raza y Sexo" type="HBoxContainer" parent="fondo/VBoxContainer" unique_id=265306941]
+[node name="FormContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="NombreContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/NombreContainer"]
+layout_mode = 2
+text = "Nombre del Personaje:"
+
+[node name="NombreInput" type="LineEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/NombreContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Ej: Aria la Valiente"
+max_length = 30
+
+[node name="DescripcionContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/DescripcionContainer"]
+layout_mode = 2
+text = "Descripción (opcional):"
+
+[node name="DescripcionInput" type="TextEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/DescripcionContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+placeholder_text = "Una breve historia de tu personaje..."
+wrap_mode = 1
+
+[node name="ImagenContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/ImagenContainer"]
+layout_mode = 2
+text = "Imagen de Avatar:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/ImagenContainer"]
 layout_mode = 2
 
-[node name="raza" type="OptionButton" parent="fondo/VBoxContainer/Raza y Sexo" unique_id=1250256104]
+[node name="ImagenOption" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/ImagenContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LoadFileButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/ImagenContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+text = "📁 Cargar..."
+
+[node name="AttributesContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RazaContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/AttributesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/AttributesContainer/RazaContainer"]
+layout_mode = 2
+text = "Raza:"
+
+[node name="RazaOption" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/AttributesContainer/RazaContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="sexo" type="OptionButton" parent="fondo/VBoxContainer/Raza y Sexo" unique_id=655755702]
+[node name="SexoContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/AttributesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/AttributesContainer/SexoContainer"]
+layout_mode = 2
+text = "Sexo:"
+
+[node name="SexoOption" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/FormContainer/AttributesContainer/SexoContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="preview" type="TextureRect" parent="fondo/VBoxContainer" unique_id=1451553221]
-custom_minimum_size = Vector2(100, 100)
+[node name="PreviewContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PreviewLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/PreviewContainer"]
+layout_mode = 2
+text = "Vista Previa:"
+horizontal_alignment = 1
+
+[node name="PreviewPanel" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/PreviewContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PreviewTexture" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ContentHBox/PreviewContainer/PreviewPanel"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Botones" type="HBoxContainer" parent="fondo/VBoxContainer" unique_id=406130517]
+[node name="ButtonsContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
 
-[node name="Guardar" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=1757122534]
+[node name="SaveButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "Guardar"
+theme_override_colors/font_color = Color(0.314, 0.784, 0.471, 1)
+theme_override_font_sizes/font_size = 18
+text = "💾 Guardar"
 
-[node name="Cargar" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=1001888119]
+[node name="LoadButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "Cargar"
+theme_override_font_sizes/font_size = 18
+text = "📂 Cargar"
 
-[node name="Aleatorio" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=1921186150]
+[node name="RandomButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "Aleatorio"
+theme_override_font_sizes/font_size = 18
+text = "🎲 Aleatorio"
 
-[node name="Volver" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=883009461]
+[node name="BackButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "Volver"
+theme_override_colors/font_color = Color(0.91, 0.3, 0.24, 1)
+theme_override_font_sizes/font_size = 18
+text = "« Volver"
