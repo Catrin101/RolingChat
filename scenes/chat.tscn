@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://diyipsmxpq0kx"]
+
+[ext_resource type="Script" uid="uid://cgrok5sc46323" path="res://scripts/systems/chat/chat_controller.gd" id="1_4o336"]
+
+[node name="Chat" type="Control" unique_id=791732358]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_4o336")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2018768071]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChatLog" type="RichTextLabel" parent="VBoxContainer" unique_id=274752760]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1153424887]
+layout_mode = 2
+
+[node name="InputField" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=1751357497]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=274477387]
+layout_mode = 2
+text = "Enviar"

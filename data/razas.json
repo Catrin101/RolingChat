@@ -1,0 +1,19 @@
+{
+  "razas": [
+    {
+      "id": "humano",
+      "nombre": "Humano",
+      "descripcion": "Versátiles y adaptables"
+    },
+    {
+      "id": "elfo",
+      "nombre": "Elfo",
+      "descripcion": "Ágiles y sabios"
+    },
+    {
+      "id": "enano",
+      "nombre": "Enano",
+      "descripcion": "Fuertes y resistentes"
+    }
+  ]
+}

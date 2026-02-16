@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bwafw02ac6qkf"]
+
+[ext_resource type="Script" uid="uid://xtkv1pv0pi0n" path="res://scripts/ui/action_selector.gd" id="1_yqwff"]
+
+[node name="ActionSelector" type="Control" unique_id=458869356]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqwff")
+
+[node name="Panel" type="Panel" parent="." unique_id=149779680]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1980570498]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1467404506]
+layout_mode = 2
+text = "Elige una acción"
+
+[node name="ItemList" type="ItemList" parent="Panel/VBoxContainer" unique_id=2011300720]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=662368578]
+layout_mode = 2
+text = "Cancelar"

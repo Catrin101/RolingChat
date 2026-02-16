@@ -1,0 +1,31 @@
+{
+  "acciones": [
+    {
+      "id": "charlar_sofa",
+      "nombre": "Charlar en el Sofá",
+      "combinaciones_sexo": [
+        ["masculino", "femenino"],
+        ["femenino", "femenino"],
+        ["masculino", "masculino"]
+      ],
+      "combinaciones_raza": [
+        ["humano", "elfo"],
+        ["humano", "humano"],
+        ["elfo", "elfo"]
+      ],
+      "imagen_url": "res://assets/images/scenes/charlar_sofa.png"
+    },
+    {
+      "id": "entrenar_juntos",
+      "nombre": "Entrenar Juntos",
+      "combinaciones_sexo": [
+        ["masculino", "masculino"]
+      ],
+      "combinaciones_raza": [
+        ["humano", "humano"],
+        ["enano", "enano"]
+      ],
+      "imagen_url": "res://assets/images/scenes/entrenar.png"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dmpi2gavmgakq"]
+
+[ext_resource type="Script" uid="uid://7vxf11gvukvl" path="res://scripts/ui/avatar_creator.gd" id="1_d88xq"]
+
+[node name="AvatarCreator" type="Control" unique_id=457603489]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d88xq")
+
+[node name="fondo" type="Panel" parent="." unique_id=371874925]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="fondo" unique_id=995808036]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="fondo/VBoxContainer" unique_id=291874437]
+layout_mode = 2
+text = "Crear Avatar"
+
+[node name="nombre" type="LineEdit" parent="fondo/VBoxContainer" unique_id=1773848012]
+layout_mode = 2
+placeholder_text = "Nombre"
+
+[node name="descripción" type="TextEdit" parent="fondo/VBoxContainer" unique_id=184514716]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+placeholder_text = "descripción"
+
+[node name="Selector de imagen" type="HBoxContainer" parent="fondo/VBoxContainer" unique_id=76261283]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="fondo/VBoxContainer/Selector de imagen" unique_id=729864177]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="fondo/VBoxContainer/Selector de imagen" unique_id=453925431]
+layout_mode = 2
+text = "Cargar desde archivo..."
+
+[node name="Raza y Sexo" type="HBoxContainer" parent="fondo/VBoxContainer" unique_id=265306941]
+layout_mode = 2
+
+[node name="raza" type="OptionButton" parent="fondo/VBoxContainer/Raza y Sexo" unique_id=1250256104]
+layout_mode = 2
+
+[node name="sexo" type="OptionButton" parent="fondo/VBoxContainer/Raza y Sexo" unique_id=655755702]
+layout_mode = 2
+
+[node name="preview" type="TextureRect" parent="fondo/VBoxContainer" unique_id=1451553221]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Botones" type="HBoxContainer" parent="fondo/VBoxContainer" unique_id=406130517]
+layout_mode = 2
+
+[node name="Guardar" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=1757122534]
+layout_mode = 2
+text = "Guardar"
+
+[node name="Cargar" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=1001888119]
+layout_mode = 2
+text = "Cargar"
+
+[node name="Aleatorio" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=1921186150]
+layout_mode = 2
+text = "Aleatorio"
+
+[node name="Volver" type="Button" parent="fondo/VBoxContainer/Botones" unique_id=883009461]
+layout_mode = 2
+text = "Volver"

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cupjhwpkhsscj"]
+
+[ext_resource type="Script" uid="uid://cfhssjhsw2cda" path="res://scripts/game/remote_avatar.gd" id="1_m8g64"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdgh6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cqya5"]
+outline_size = 1
+
+[node name="RemoteAvatar" type="CharacterBody2D" unique_id=1978363787]
+script = ExtResource("1_m8g64")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=971360966]
+shape = SubResource("RectangleShape2D_pdgh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=737875583]
+
+[node name="Nametag" type="Label" parent="." unique_id=581753934]
+offset_top = -30.0
+offset_right = 40.0
+offset_bottom = -7.0
+label_settings = SubResource("LabelSettings_cqya5")

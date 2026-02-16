@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://8nvi5r8q3n0t"]
+
+[ext_resource type="Script" uid="uid://pwlo787hgk74" path="res://scripts/game/world_controller.gd" id="1_o1atq"]
+[ext_resource type="PackedScene" uid="uid://diyipsmxpq0kx" path="res://scenes/chat.tscn" id="2_5gu6x"]
+
+[sub_resource type="TileSet" id="TileSet_q60fs"]
+
+[node name="Lobby" type="Node2D" unique_id=1649091720]
+
+[node name="Map" type="TileMapLayer" parent="." unique_id=1418181959]
+tile_set = SubResource("TileSet_q60fs")
+
+[node name="WorldController" type="Node" parent="." unique_id=1921997400]
+script = ExtResource("1_o1atq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1497189653]
+
+[node name="Chat" parent="CanvasLayer" unique_id=791732358 instance=ExtResource("2_5gu6x")]
